@@ -1,0 +1,50 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>Webshop-Root-Group</groupId>
+		<artifactId>Webshop-Root</artifactId>
+		<version>1.0</version>
+	</parent>
+	<groupId>Webshop-Services-Group</groupId>
+	<artifactId>WebshopServices</artifactId>
+	<version>1.0.1</version>
+	<packaging>jar</packaging>
+	<name>WebshopServices</name>
+
+	<dependencies>
+		<!-- For h2 Database -->
+
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>1.4.186</version>
+		</dependency>
+
+		<!-- For Spring ORM, JPA -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>3.2.6.RELEASE</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>3.2.6.RELEASE</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>4.1.9.Final</version>
+		</dependency>		
+		
+		<dependency>
+			<groupId>javax.transaction</groupId>
+			<artifactId>jta</artifactId>
+			<version>1.1</version>
+		</dependency>
+	</dependencies>
+
+</project>
