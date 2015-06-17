@@ -40,10 +40,12 @@ public class Product implements Serializable {
 	private Long productId;
 
 	@NotEmpty(message = "Product Name is required field")
+	@Length(max = 255, message = "Limit to number of characters for name is 255")
 	private String productName;
 
 	private Double price;
 
+	@Length(max = 255, message = "Limit to number of characters for description is 255")
 	private String description;
 
 	private Date createdDt;
