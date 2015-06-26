@@ -18,8 +18,8 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
 /**
- * @author ssukheja
  * This Entity maps to table CustomerOrder in DB
+ * @author ssukheja 
  */
 
 @Entity
@@ -51,13 +51,13 @@ public class CustomerOrder implements Serializable {
 	private Long shippingZip;
 
 	private Date createdDt;
-		
-	@OneToMany(cascade=CascadeType.ALL)
+
+	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn
 	private List<OrderItems> orderItems = new ArrayList<OrderItems>();
-	
+
 	@ManyToOne
-	@JoinColumn(name="userId")
+	@JoinColumn(name = "userId")
 	private User users;
 
 	/**
@@ -68,7 +68,8 @@ public class CustomerOrder implements Serializable {
 	}
 
 	/**
-	 * @param ordersId the ordersId to set
+	 * @param ordersId
+	 *            the ordersId to set
 	 */
 	public void setOrdersId(Long orderId) {
 		this.orderId = orderId;
@@ -82,7 +83,8 @@ public class CustomerOrder implements Serializable {
 	}
 
 	/**
-	 * @param orderNum the orderNum to set
+	 * @param orderNum
+	 *            the orderNum to set
 	 */
 	public void setOrderNum(Long orderNum) {
 		this.orderNum = orderNum;
@@ -96,7 +98,8 @@ public class CustomerOrder implements Serializable {
 	}
 
 	/**
-	 * @param status the status to set
+	 * @param status
+	 *            the status to set
 	 */
 	public void setStatus(String status) {
 		this.status = status;
@@ -110,7 +113,8 @@ public class CustomerOrder implements Serializable {
 	}
 
 	/**
-	 * @param amountTotal the amountTotal to set
+	 * @param amountTotal
+	 *            the amountTotal to set
 	 */
 	public void setAmountTotal(Double amountTotal) {
 		this.amountTotal = amountTotal;
@@ -124,7 +128,8 @@ public class CustomerOrder implements Serializable {
 	}
 
 	/**
-	 * @param shippingAddress the shippingAddress to set
+	 * @param shippingAddress
+	 *            the shippingAddress to set
 	 */
 	public void setShippingAddress(String shippingAddress) {
 		this.shippingAddress = shippingAddress;
@@ -138,7 +143,8 @@ public class CustomerOrder implements Serializable {
 	}
 
 	/**
-	 * @param shippingCity the shippingCity to set
+	 * @param shippingCity
+	 *            the shippingCity to set
 	 */
 	public void setShippingCity(String shippingCity) {
 		this.shippingCity = shippingCity;
@@ -152,7 +158,8 @@ public class CustomerOrder implements Serializable {
 	}
 
 	/**
-	 * @param shippingZip the shippingZip to set
+	 * @param shippingZip
+	 *            the shippingZip to set
 	 */
 	public void setShippingZip(Long shippingZip) {
 		this.shippingZip = shippingZip;
@@ -166,7 +173,8 @@ public class CustomerOrder implements Serializable {
 	}
 
 	/**
-	 * @param createdDt the createdDt to set
+	 * @param createdDt
+	 *            the createdDt to set
 	 */
 	public void setCreatedDt(Date createdDt) {
 		this.createdDt = createdDt;
@@ -187,7 +195,8 @@ public class CustomerOrder implements Serializable {
 	}
 
 	/**
-	 * @param users the users to set
+	 * @param users
+	 *            the users to set
 	 */
 	public void setUsers(User users) {
 		this.users = users;
@@ -201,14 +210,16 @@ public class CustomerOrder implements Serializable {
 	}
 
 	/**
-	 * @param orderItems the orderItems to set
+	 * @param orderItems
+	 *            the orderItems to set
 	 */
 	public void setOrderItems(List<OrderItems> orderItems) {
 		this.orderItems = orderItems;
 	}
 
 	/**
-	 * @param orderId the orderId to set
+	 * @param orderId
+	 *            the orderId to set
 	 */
 	public void setOrderId(Long orderId) {
 		this.orderId = orderId;
