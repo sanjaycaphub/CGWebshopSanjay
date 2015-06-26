@@ -9,6 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -44,7 +45,7 @@ public class CategoryRepositoryImpl implements ICategoryRepository {
 		return true;		
 	}
 	
-	
+	@Cacheable("cachedCategories")
 	public List<Category> searchAllCategories(){
 		
 		return entityManager.createNamedQuery("selectAllCategories",Category.class).getResultList();	
@@ -73,13 +74,14 @@ public class CategoryRepositoryImpl implements ICategoryRepository {
 				.createNamedQuery("checkCategoryExists",Category.class);
 		query.setParameter("catName", categoryName);
 
-		@SuppressWarnings("unchecked")
-		List<Category> existingCategoryList = query.getResultList();
+		
+		return query.getResultList().size() > 0;
 
-		if (null!=existingCategoryList && existingCategoryList.size() > 0)
+		
+		/*if (null!=existingCategoryList && existingCategoryList.size() > 0)
 			return true;
 		else
-			return false;
+			return false;*/
 	}
 	
 	
@@ -88,14 +90,12 @@ public class CategoryRepositoryImpl implements ICategoryRepository {
 		Query query = entityManager
 				.createNamedQuery("productexistsincategory",Product.class);
 		query.setParameter("catId", categoryId);	
+		return query.getResultList().size() > 0;
 		
-		@SuppressWarnings("unchecked")
-		List<Product> productList = query.getResultList();
-
-		if (null!=productList && productList.size() > 0)
+		/*if (null!=productList && productList.size() > 0)
 			return true;
 		else
-			return false;
+			return false;*/
 	}
 
 }
