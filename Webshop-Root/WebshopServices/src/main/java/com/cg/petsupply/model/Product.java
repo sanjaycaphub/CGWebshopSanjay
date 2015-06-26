@@ -13,20 +13,23 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.Transient;
 
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
 /**
- * @author ssukheja
  * This Entity maps to table Product in DB
+ * 
+ * @author ssukheja
+ * 
  */
 
 @NamedQueries({
-	@NamedQuery(name="selectAllProducts", query="select p from Product p"),
-	@NamedQuery(name="deleteSingleProduct", query="delete from Product p where p.productId = :paramProductId"),
-	@NamedQuery(name="checkProductExists", query="select p from Product p where upper(p.productName) "
-						+ "like upper(:prodName) and p.category.categoryId = :prodId")
-})
+		@NamedQuery(name = "selectAllProducts", query = "select p from Product p"),
+		@NamedQuery(name = "deleteSingleProduct", query = "delete from Product p where p.productId = :paramProductId"),
+		@NamedQuery(name = "checkProductExists", query = "select p from Product p where upper(p.productName) "
+				+ "like upper(:prodName) and p.category.categoryId = :prodId") })
 @Entity
 public class Product implements Serializable {
 
@@ -40,10 +43,12 @@ public class Product implements Serializable {
 	private Long productId;
 
 	@NotEmpty(message = "Product Name is required field")
+	@Length(max = 255, message = "Limit to number of characters for name is 255")
 	private String productName;
 
 	private Double price;
 
+	@Length(max = 255, message = "Limit to number of characters for description is 255")
 	private String description;
 
 	private Date createdDt;
@@ -51,8 +56,11 @@ public class Product implements Serializable {
 	private Date modifiedDt;
 
 	@ManyToOne
-	@JoinColumn(name = "categoryId")	
+	@JoinColumn(name = "categoryId")
 	private Category category;
+
+	@Transient
+	private Long quantity;
 
 	/**
 	 * @return the productId
@@ -157,6 +165,21 @@ public class Product implements Serializable {
 	 */
 	public void setCategory(Category category) {
 		this.category = category;
+	}
+
+	/**
+	 * @return the quantity
+	 */
+	public Long getQuantity() {
+		return quantity;
+	}
+
+	/**
+	 * @param quantity
+	 *            the quantity to set
+	 */
+	public void setQuantity(Long quantity) {
+		this.quantity = quantity;
 	}
 
 }
