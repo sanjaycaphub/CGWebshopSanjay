@@ -9,16 +9,24 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
 /**
- * @author ssukheja
  * This Entity maps to table User in DB
+ * 
+ * @author ssukheja
+ * 
  */
-
+@NamedQueries({
+		@NamedQuery(name = "authenticateAdmin", query = "select u from User u where lower(u.userName) like lower(:username) and u.password like :passwd "
+				+ "and u.isAdmin like :isadmin"),
+		@NamedQuery(name = "authenticateUser", query = "select u from User u where lower(u.userName) like lower(:username) and u.password like :passwd") })
 @Entity
 public class User implements Serializable {
 
@@ -31,33 +39,40 @@ public class User implements Serializable {
 	@GeneratedValue
 	private Long userId;
 
-	@NotEmpty(message="Username is a required field")
+	@NotEmpty(message = "Username is a required field")
+	@Length(max = 100, message = "Number of characters for UserName cannot exceed 100")
 	private String userName;
 
-	@NotEmpty(message="Password is a required field")
+	@Length(min = 8, message = "Password should be minimum 8 characters in length")
 	private String password;
-	
-	private String userRole;
 
-	@NotNull
+	private String isAdmin;
+
+	@NotEmpty(message = "First Name is a required field")
+	@Length(max = 100, message = "Number of characters for First Name cannot exceed 100")
 	private String firstName;
 
-	@NotNull
+	@NotEmpty(message = "Last Name is a required field")
+	@Length(max = 100, message = "Number of characters for Last Name cannot exceed 100")
 	private String lastName;
 
-	private String emailAddress;
+	@Email
+	private String email;
 
-	private String address;
+	@NotEmpty(message = "Please enter your residence Street Address")
+	private String streetAddress;
 
+	@NotEmpty(message = "Please enter your residence city")
 	private String city;
 
-	private Long zip;
+	@NotEmpty(message = "Please enter your residence zipcode")
+	private String zip;
 
 	private Date createdDt;
 
 	private Date modifiedDt;
-	
-	@OneToMany(mappedBy="users", cascade=CascadeType.ALL)
+
+	@OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
 	private List<CustomerOrder> orderList = new ArrayList<CustomerOrder>();
 
 	/**
@@ -68,7 +83,8 @@ public class User implements Serializable {
 	}
 
 	/**
-	 * @param userId the userId to set
+	 * @param userId
+	 *            the userId to set
 	 */
 	public void setUserId(Long userId) {
 		this.userId = userId;
@@ -82,7 +98,8 @@ public class User implements Serializable {
 	}
 
 	/**
-	 * @param userName the userName to set
+	 * @param userName
+	 *            the userName to set
 	 */
 	public void setUserName(String userName) {
 		this.userName = userName;
@@ -96,24 +113,26 @@ public class User implements Serializable {
 	}
 
 	/**
-	 * @param password the password to set
+	 * @param password
+	 *            the password to set
 	 */
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
 	/**
-	 * @return the userRole
+	 * @return the isAdmin
 	 */
-	public String getUserRole() {
-		return userRole;
+	public String getIsAdmin() {
+		return isAdmin;
 	}
 
 	/**
-	 * @param userRole the userRole to set
+	 * @param isAdmin
+	 *            the isAdmin to set
 	 */
-	public void setUserRole(String userRole) {
-		this.userRole = userRole;
+	public void setIsAdmin(String isAdmin) {
+		this.isAdmin = isAdmin;
 	}
 
 	/**
@@ -124,7 +143,8 @@ public class User implements Serializable {
 	}
 
 	/**
-	 * @param firstName the firstName to set
+	 * @param firstName
+	 *            the firstName to set
 	 */
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
@@ -138,7 +158,8 @@ public class User implements Serializable {
 	}
 
 	/**
-	 * @param lastName the lastName to set
+	 * @param lastName
+	 *            the lastName to set
 	 */
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
@@ -147,29 +168,31 @@ public class User implements Serializable {
 	/**
 	 * @return the emailAddress
 	 */
-	public String getEmailAddress() {
-		return emailAddress;
+	public String getEmail() {
+		return email;
 	}
 
 	/**
-	 * @param emailAddress the emailAddress to set
+	 * @param emailAddress
+	 *            the emailAddress to set
 	 */
-	public void setEmailAddress(String emailAddress) {
-		this.emailAddress = emailAddress;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	/**
-	 * @return the address
+	 * @return the streetAddress
 	 */
-	public String getAddress() {
-		return address;
+	public String getStreetAddress() {
+		return streetAddress;
 	}
 
 	/**
-	 * @param address the address to set
+	 * @param streetAddress
+	 *            the streetAddress to set
 	 */
-	public void setAddress(String address) {
-		this.address = address;
+	public void setStreetAddress(String streetAddress) {
+		this.streetAddress = streetAddress;
 	}
 
 	/**
@@ -180,7 +203,8 @@ public class User implements Serializable {
 	}
 
 	/**
-	 * @param city the city to set
+	 * @param city
+	 *            the city to set
 	 */
 	public void setCity(String city) {
 		this.city = city;
@@ -189,14 +213,15 @@ public class User implements Serializable {
 	/**
 	 * @return the zip
 	 */
-	public Long getZip() {
+	public String getZip() {
 		return zip;
 	}
 
 	/**
-	 * @param zip the zip to set
+	 * @param zip
+	 *            the zip to set
 	 */
-	public void setZip(Long zip) {
+	public void setZip(String zip) {
 		this.zip = zip;
 	}
 
@@ -208,7 +233,8 @@ public class User implements Serializable {
 	}
 
 	/**
-	 * @param createdDt the createdDt to set
+	 * @param createdDt
+	 *            the createdDt to set
 	 */
 	public void setCreatedDt(Date createdDt) {
 		this.createdDt = createdDt;
@@ -222,7 +248,8 @@ public class User implements Serializable {
 	}
 
 	/**
-	 * @param modifiedDt the modifiedDt to set
+	 * @param modifiedDt
+	 *            the modifiedDt to set
 	 */
 	public void setModifiedDt(Date modifiedDt) {
 		this.modifiedDt = modifiedDt;
@@ -243,11 +270,10 @@ public class User implements Serializable {
 	}
 
 	/**
-	 * @param orderList the orderList to set
+	 * @param orderList
+	 *            the orderList to set
 	 */
 	public void setOrderList(List<CustomerOrder> orderList) {
 		this.orderList = orderList;
 	}
-
-	
 }
