@@ -19,8 +19,10 @@ import com.cg.petsupply.model.User;
 import com.cg.petsupply.service.IUserService;
 
 /**
- * @author ssukheja
  * Request Controller for Webshop Admin Authentication
+ * 
+ * @author ssukheja
+ * 
  */
 
 @Controller
@@ -29,12 +31,12 @@ public class LoginController {
 
 	@Autowired
 	private IUserService userService;
-	
-	private static final Logger log = Logger
-			.getLogger(LoginController.class);
+
+	private static final Logger log = Logger.getLogger(LoginController.class);
 
 	/**
 	 * Handler Mapping/Method to authenticate user is admin or not
+	 * 
 	 * @param model
 	 * @param userName
 	 * @param password
@@ -44,46 +46,48 @@ public class LoginController {
 	public String authenticateUser(Model model,
 			@RequestParam(value = "username", required = true) String userName,
 			@RequestParam(value = "password", required = true) String password,
-			@RequestParam(value = "userrole") String userRole) {
+			@RequestParam(value = "isadmin") String isAdmin) {
 
-		log.info("Parameters coming are--" + userName + " "
-				+ password);
+		log.info("Parameters coming are--" + userName + " " + password);
 
 		if (userName != null || password != null) {
 
-			User loginUser = userService.authenticateUser(userName, password, userRole);
+			User loginUser = userService.authenticateAdminAndUser(userName,
+					password, isAdmin);
 			if (loginUser != null) {
 				model.addAttribute("loginUser", loginUser);
-				return "home";
-			}			
+				return Constants.returnHome;
+			}
 		}
-			model.addAttribute("wrongLoginCredentials", Constants.wrongAdminCredentials);
-			return "login";
+		model.addAttribute("wrongLoginCredentials",
+				Constants.wrongAdminCredentials);
+		return Constants.returnLogin;
 	}
-	
+
 	/**
-	 * For Returning to home screen 
+	 * For Returning to home screen
+	 * 
 	 * @return
 	 */
 	@RequestMapping("/home.htm")
-	public String goHome(){
+	public String goHome() {
 		log.info("Returning to Home");
-		return "home";
+		return Constants.returnHome;
 	}
-	
+
 	/**
 	 * Logout admin from webshop
+	 * 
 	 * @param status
 	 * @param request
 	 * @return
 	 */
 	@RequestMapping("/logout.htm")
-	public String logout(SessionStatus status, HttpServletRequest request){
-		
-		log.info("Logging Out");
+	public String logout(SessionStatus status, HttpServletRequest request) {
+
 		status.setComplete();
-		request.getSession().invalidate();	
+		request.getSession().invalidate();
 		log.info("Log Out Complete");
-		return "login";
+		return Constants.returnLogin;
 	}
 }
