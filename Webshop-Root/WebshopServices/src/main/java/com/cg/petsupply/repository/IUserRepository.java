@@ -8,8 +8,8 @@ import java.util.List;
 import com.cg.petsupply.model.User;
 
 /**
- * @author ssukheja
- * Manage Users - Repository / DAO APIs
+ * Repository APIs for Authentication and registering new user to Store
+ * @author ssukheja 
  *
  */
 public interface IUserRepository {
@@ -22,5 +22,12 @@ public interface IUserRepository {
 	 * @param userRole
 	 * @return
 	 */
-	List<User> authenticateUser(String userName, String password, String userRole);
+	List<User> authenticateAdminAndUser(String userName, String password, String userRole);
+	
+	/**
+	 * Repository method to add new user to petsupplies store database (Sprint 2)
+	 * @param user
+	 * @return
+	 */
+	boolean addNewUser(User user);
 }
