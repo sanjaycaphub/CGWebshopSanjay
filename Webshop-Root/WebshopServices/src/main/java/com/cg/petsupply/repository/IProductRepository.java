@@ -2,12 +2,13 @@ package com.cg.petsupply.repository;
 
 import java.util.List;
 
+import com.cg.petsupply.commons.utils.ProductSearchVO;
 import com.cg.petsupply.model.Product;
 
 /**
+ * Repository APIs for Manage Product by Admin and Searching/Shopping products by End Users  
  * @author ssukheja
- * Manage Product - Repository / DAO APIs
- *
+ * 
  */
 public interface IProductRepository {
 
@@ -38,10 +39,17 @@ public interface IProductRepository {
 	
 	
 	/**
-	 * Repository method to find and return requested product for edit
+	 * Repository method to find and return requested product based on Product Id
 	 * @param productId
 	 * @return
 	 */
-	Product getProductForEdit(Long productId);
+	Product searchProductById(Long productId);
+	
+	/**
+	 * Repository method to find and return products based on users search criteria (Sprint 2)
+	 * @param searchVO
+	 * @return
+	 */
+	List<Product> searchProducts(ProductSearchVO searchVO);	
 	
 }
