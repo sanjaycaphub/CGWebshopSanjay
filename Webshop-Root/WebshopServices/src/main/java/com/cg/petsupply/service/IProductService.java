@@ -4,12 +4,14 @@
 package com.cg.petsupply.service;
 
 import java.util.List;
-
+import com.cg.petsupply.commons.utils.ProductSearchVO;
 import com.cg.petsupply.model.Product;
 
+
 /**
+ * Business Service APIs for Manage Product by Admin and Searching/Shopping products by End Users  
  * @author ssukheja
- * Manage Product - Business Service APIs
+ * 
  */
 public interface IProductService {
 
@@ -35,9 +37,17 @@ public interface IProductService {
 	boolean deleteSingleProduct(Long productId);
 	
 	/**
-	 * Service method to find and return requested product for edit
+	 * Service method to find and return requested product based on Product Id
 	 * @param productId
 	 * @return
 	 */
-	Product getProductForEdit(Long productId);
+	Product searchProductById(Long productId);
+	
+	/**
+	 * Service method to find and return products based on users search criteria (Sprint 2)
+	 * @param searchVO
+	 * @return
+	 */
+	List<Product> searchProducts(ProductSearchVO searchVO);	
+	
 }
