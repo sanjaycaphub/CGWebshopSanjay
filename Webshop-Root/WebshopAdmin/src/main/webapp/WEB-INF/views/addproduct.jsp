@@ -22,10 +22,10 @@
 		<table border="0" cellspacing="5">
 			<tr>
 				<td><form:label path="category">
-						<h6>Select Category: </h6>
+						<h6>Select Category:</h6>
 					</form:label></td>
 
-				<td><form:select path="category.categoryId">						
+				<td><form:select path="category.categoryId">
 						<form:options items="${selectCategoryList}"
 							itemLabel="categoryName" itemValue="categoryId" />
 					</form:select></td>
@@ -34,18 +34,18 @@
 			<tr></tr>
 			<tr></tr>
 			<tr></tr>
-			
+
 			<tr>
-				<td><h6>Product Name: </h6></td>
+				<td><h6>Product Name:</h6></td>
 				<td><form:input path="productName" />
-		<td><form:errors path="productName" cssStyle="color: #ff0000;" /></td>
-		</tr>
-		<tr></tr>
+				<td><form:errors path="productName" cssStyle="color: #ff0000;" /></td>
+			</tr>
+			<tr></tr>
 			<tr></tr>
 			<tr></tr>
 
 			<tr>
-				<td><h6>Product Description: </h6></td>
+				<td><h6>Product Description:</h6></td>
 				<td><form:textarea path="description" /></td>
 				<td><form:errors path="description" cssStyle="color: #ff0000;" /></td>
 			</tr>
@@ -54,7 +54,7 @@
 			<tr></tr>
 
 			<tr>
-				<td><h6>Product Price: </h6></td>
+				<td><h6>Product Price:</h6></td>
 				<td><form:input path="price" /></td>
 				<td><form:errors path="price" cssStyle="color: #ff0000;" /></td>
 			</tr>
@@ -63,14 +63,16 @@
 			<tr></tr>
 			<tr></tr>
 			<tr>
-				<td align="left"><input type="submit" value="Save Product" class="myButton"></td>				
-				<td align="right"><a href="allproducts.htm" class="myLink">View All Products</a>
+				<td align="left"><input type="submit" value="Save Product"
+					class="myButton"></td>
+				<td align="right"><a href="allproducts.htm" class="myLink">View
+						All Products</a>
 			</tr>
 
 		</table>
 
-		</form:form>
+	</form:form>
 </div>
 <br class="clearer">
-				
-<%@ include file="../layouts/footer.jsp" %>
+
+<%@ include file="../layouts/footer.jsp"%>
