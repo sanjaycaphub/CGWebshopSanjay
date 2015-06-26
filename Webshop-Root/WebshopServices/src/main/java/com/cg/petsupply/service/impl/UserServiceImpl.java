@@ -3,6 +3,7 @@
  */
 package com.cg.petsupply.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,13 +31,19 @@ public class UserServiceImpl implements IUserService {
 	 * com.cg.petsupply.service.IUserService#authenticateUser(java.lang.String,
 	 * java.lang.String)
 	 */
-	public User authenticateUser(String userName, String password, String userRole) {
+	public User authenticateAdminAndUser(String userName, String password, String userRole) {
 
 		if (userName != null && password != null) {
-			List<User> authenticatedList = userRepository.authenticateUser(userName, password, userRole);
+			List<User> authenticatedList = userRepository.authenticateAdminAndUser(userName, password, userRole);
 			if (authenticatedList.size() > 0)
 				return authenticatedList.get(0);			
 		}
 		return null;
+	}
+	
+	public boolean addNewUser(User user){
+		user.setIsAdmin("N");
+		user.setCreatedDt(new Date());
+		return userRepository.addNewUser(user);
 	}
 }
