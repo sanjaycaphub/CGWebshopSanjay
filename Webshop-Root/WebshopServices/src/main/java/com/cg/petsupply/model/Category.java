@@ -14,7 +14,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  * This Entity maps to table Category in DB
- * @author ssukheja 
+ * @author ssukheja
  */
 
 @NamedQueries({
