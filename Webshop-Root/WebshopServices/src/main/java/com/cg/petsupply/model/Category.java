@@ -9,21 +9,19 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
-
 /**
- * @author ssukheja
  * This Entity maps to table Category in DB
+ * @author ssukheja 
  */
 
-
 @NamedQueries({
-	@NamedQuery(name="selectAllCategories", query="select c from Category c"),
-	@NamedQuery(name="deleteSingleCategory", query="delete from Category c where c.categoryId = :paramCategoryId"),
-	@NamedQuery(name="checkCategoryExists", query="select c from Category c where upper(c.categoryName) like upper(:catName)"),
-	@NamedQuery(name="productexistsincategory",query="select p from Product p where p.category.categoryId like :catId")
-})
+		@NamedQuery(name = "selectAllCategories", query = "select c from Category c"),
+		@NamedQuery(name = "deleteSingleCategory", query = "delete from Category c where c.categoryId = :paramCategoryId"),
+		@NamedQuery(name = "checkCategoryExists", query = "select c from Category c where upper(c.categoryName) like upper(:catName)"),
+		@NamedQuery(name = "productexistsincategory", query = "select p from Product p where p.category.categoryId like :catId") })
 @Entity
 public class Category implements Serializable {
 
@@ -35,17 +33,18 @@ public class Category implements Serializable {
 	@Id
 	@GeneratedValue
 	private Long categoryId;
-			
-	@NotEmpty(message="Category Name is required field")
+
+	@NotEmpty(message = "Category Name is required field")
+	@Length(max = 255, message = "Limit to number of characters for name is 255")
 	private String categoryName;
-		
+
+	@Length(max = 255, message = "Limit to number of characters for description is 255")
 	private String categoryDesc;
-	
+
 	private Date createdDt;
 
 	private Date modifiedDt;
 
-	
 	/**
 	 * @return the categoryId
 	 */
@@ -84,7 +83,8 @@ public class Category implements Serializable {
 	}
 
 	/**
-	 * @param categoryDesc the categoryDesc to set
+	 * @param categoryDesc
+	 *            the categoryDesc to set
 	 */
 	public void setCategoryDesc(String categoryDesc) {
 		this.categoryDesc = categoryDesc;
@@ -98,7 +98,8 @@ public class Category implements Serializable {
 	}
 
 	/**
-	 * @param createdDt the createdDt to set
+	 * @param createdDt
+	 *            the createdDt to set
 	 */
 	public void setCreatedDt(Date createdDt) {
 		this.createdDt = createdDt;
@@ -112,10 +113,11 @@ public class Category implements Serializable {
 	}
 
 	/**
-	 * @param modifiedDt the modifiedDt to set
+	 * @param modifiedDt
+	 *            the modifiedDt to set
 	 */
 	public void setModifiedDt(Date modifiedDt) {
 		this.modifiedDt = modifiedDt;
-	}	
+	}
 
 }
