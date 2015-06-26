@@ -9,11 +9,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cg.petsupply.commons.utils.ProductSearchVO;
 import com.cg.petsupply.model.Product;
 import com.cg.petsupply.repository.IProductRepository;
 import com.cg.petsupply.service.IProductService;
 
 /**
+ * Implementation of the business services declared in IProductService
  * @author ssukheja
  *
  */
@@ -33,9 +35,9 @@ public class ProductServiceImpl implements IProductService {
 		return productRepository.deleteSingleProduct(productId);
 	}
 	
-	public Product getProductForEdit(Long productId){
+	public Product searchProductById(Long productId){
 		
-		return productRepository.getProductForEdit(productId);
+		return productRepository.searchProductById(productId);
 	}
 	
 	public boolean saveProduct(Product product, String userAction) {
@@ -47,4 +49,9 @@ public class ProductServiceImpl implements IProductService {
 			
 		return productRepository.saveProduct(product, userAction);
 	}
+	
+	public List<Product> searchProducts(ProductSearchVO searchVO){
+		return productRepository.searchProducts(searchVO);
+	}
+	
 }
