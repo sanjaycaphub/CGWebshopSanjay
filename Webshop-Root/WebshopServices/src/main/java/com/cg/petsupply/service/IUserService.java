@@ -6,8 +6,8 @@ package com.cg.petsupply.service;
 import com.cg.petsupply.model.User;
 
 /**
- * @author ssukheja
- * Manage Users - Business Service APIs
+ * Business Service APIs for Authentication and registering new user to Store
+ * @author ssukheja 
  *
  */
 public interface IUserService {
@@ -19,6 +19,14 @@ public interface IUserService {
 	 * @param userRole
 	 * @return
 	 */
-	User authenticateUser(String userName, String password, String userRole);
+	User authenticateAdminAndUser(String userName, String password, String isAdmin);	
+	
+	
+	/**
+	 * Service method add/register new user to petsupplies store (Sprint 2)
+	 * @param user
+	 * @return
+	 */
+	boolean addNewUser(User user);
 	
 }
