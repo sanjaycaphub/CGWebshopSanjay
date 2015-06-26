@@ -11,11 +11,8 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class SessionValidateUtil {
 
-	public static boolean invalidSession(HttpServletRequest request){		
-		
-		if(request.getSession().getAttribute("loginUser") == null)
-			{return true;}
-		else
-			{return false;}
+	public static boolean invalidSession(HttpServletRequest request) {
+
+		return (request.getSession().getAttribute("loginUser") == null);
 	}
 }
