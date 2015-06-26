@@ -26,7 +26,10 @@ import com.cg.petsupply.service.ICategoryService;
 import com.cg.petsupply.service.IProductService;
 
 /**
- * @author ssukheja Request controller for admin to manage Products
+ * Request controller for admin to manage Products
+ * 
+ * @author ssukheja
+ * 
  */
 
 @Controller
@@ -38,8 +41,7 @@ public class ProductController {
 	@Autowired
 	private ICategoryService categoryService;
 
-	private static final Logger log = Logger
-			.getLogger(ProductController.class);
+	private static final Logger log = Logger.getLogger(ProductController.class);
 
 	/**
 	 * Handler Mapping/Method for Admin to add new Product
@@ -50,9 +52,9 @@ public class ProductController {
 	@RequestMapping(value = "/addproduct.htm", method = RequestMethod.GET)
 	public String addProduct(ModelMap model, HttpServletRequest request) {
 
-		if(SessionValidateUtil.invalidSession(request))
-			return "login";
-		
+		if (SessionValidateUtil.invalidSession(request))
+			return Constants.returnLogin;
+
 		log.info("Starting to add new Product now");
 
 		model.addAttribute("productForm", new Product());
@@ -60,7 +62,7 @@ public class ProductController {
 		List<Category> selectCategoryList = categoryService
 				.searchAllCategories();
 		model.addAttribute("selectCategoryList", selectCategoryList);
-		return "addproduct";
+		return Constants.returnAddProduct;
 	}
 
 	/**
@@ -72,13 +74,13 @@ public class ProductController {
 	@RequestMapping(value = "/allproducts.htm", method = RequestMethod.GET)
 	public String showAllProducts(ModelMap model, HttpServletRequest request) {
 
-		if(SessionValidateUtil.invalidSession(request))
-			return "login";
-		
+		if (SessionValidateUtil.invalidSession(request))
+			return Constants.returnLogin;
+
 		log.info("Showing all Products ");
 
 		model.addAttribute("productList", productService.searchAllProducts());
-		return "productList";
+		return Constants.returnProductList;
 	}
 
 	/**
@@ -93,16 +95,16 @@ public class ProductController {
 			@RequestParam(value = "prodId", required = true) Long productId,
 			ModelMap model, HttpServletRequest request) {
 
-		if(SessionValidateUtil.invalidSession(request))
-			return "login";
-		
+		if (SessionValidateUtil.invalidSession(request))
+			return Constants.returnLogin;
+
 		log.info("Deleting product, Id paramater is -- " + productId);
 
 		if (productService.deleteSingleProduct(productId))
 			model.addAttribute("prodDelMsg", Constants.productDeleteSuccess);
 
 		model.addAttribute("productList", productService.searchAllProducts());
-		return "productList";
+		return Constants.returnProductList;
 	}
 
 	/**
@@ -117,18 +119,21 @@ public class ProductController {
 			@RequestParam(value = "prodId", required = true) Long productId,
 			ModelMap model, HttpServletRequest request) {
 
-		if(SessionValidateUtil.invalidSession(request))
-			return "login";
-		
-		log.info("Editing Product, Id paramater is -- " + productId);		
-		
-		model.addAttribute("productForm", productService.getProductForEdit(productId));		
-		model.addAttribute("selectCategoryList", categoryService.searchAllCategories());
-		return "editproduct";
+		if (SessionValidateUtil.invalidSession(request))
+			return Constants.returnLogin;
+
+		log.info("Editing Product, Id paramater is -- " + productId);
+
+		model.addAttribute("productForm",
+				productService.searchProductById(productId));
+		model.addAttribute("selectCategoryList",
+				categoryService.searchAllCategories());
+		return Constants.returnEditProduct;
 	}
 
 	/**
-	 * Handler Mapping/Method to handle Save product Action by Admin for new products and update existing products
+	 * Handler Mapping/Method to handle Save product Action by Admin for new
+	 * products and update existing products
 	 * 
 	 * @param product
 	 * @param result
@@ -140,35 +145,42 @@ public class ProductController {
 	@RequestMapping(value = "/saveproduct.htm", method = RequestMethod.POST)
 	public String onSubmitSaveProduct(
 			@ModelAttribute(value = "productForm") @Valid Product product,
-			BindingResult result, @RequestParam(value = "userAction") String userAction,
+			BindingResult result,
+			@RequestParam(value = "userAction") String userAction,
 			ModelMap model, HttpServletRequest request) {
 
-		if(SessionValidateUtil.invalidSession(request))
-			return "login";
-		
+		if (SessionValidateUtil.invalidSession(request))
+			return Constants.returnLogin;
+
 		log.info("Starting to save product now--" + userAction);
-		
-		model.addAttribute("selectCategoryList", categoryService.searchAllCategories());
+
+		model.addAttribute("selectCategoryList",
+				categoryService.searchAllCategories());
 
 		if (result.hasErrors() && userAction.equalsIgnoreCase("add"))
-			return "addproduct";
+			return Constants.returnAddProduct;
 
 		else if (result.hasErrors() && userAction.equalsIgnoreCase("edit"))
-			return "editproduct";		
+			return Constants.returnEditProduct;
 
-		if (userAction.equalsIgnoreCase("add") && productService.saveProduct(product, userAction))
-			model.addAttribute("saveProductMsg", product.getProductName()+Constants.productAddSuccess);
+		if (userAction.equalsIgnoreCase("add")
+				&& productService.saveProduct(product, userAction)) {
+			model.addAttribute("saveProductMsg", product.getProductName()
+					+ Constants.productAddSuccess);
+		}
 
-		else if (userAction.equalsIgnoreCase("edit") && productService.saveProduct(product, userAction)) {
-			model.addAttribute("saveProductMsg", product.getProductName()+Constants.productEditSuccess);
-			return "editproduct";
+		else if (userAction.equalsIgnoreCase("edit")
+				&& productService.saveProduct(product, userAction)) {
+			model.addAttribute("saveProductMsg", product.getProductName()
+					+ Constants.productEditSuccess);
+			return Constants.returnEditProduct;
 		}
 
 		else
 			result.rejectValue("productName", "productName.exist",
 					Constants.productExists);
 
-		return "addproduct";
+		return Constants.returnAddProduct;
 	}
 
 }// End of Controller
