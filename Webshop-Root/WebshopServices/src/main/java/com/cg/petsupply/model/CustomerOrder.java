@@ -48,7 +48,7 @@ public class CustomerOrder implements Serializable {
 	private String shippingCity;
 
 	@NotNull
-	private Long shippingZip;
+	private String shippingZip;
 
 	private Date createdDt;
 
@@ -153,7 +153,7 @@ public class CustomerOrder implements Serializable {
 	/**
 	 * @return the shippingZip
 	 */
-	public Long getShippingZip() {
+	public String getShippingZip() {
 		return shippingZip;
 	}
 
@@ -161,7 +161,7 @@ public class CustomerOrder implements Serializable {
 	 * @param shippingZip
 	 *            the shippingZip to set
 	 */
-	public void setShippingZip(Long shippingZip) {
+	public void setShippingZip(String shippingZip) {
 		this.shippingZip = shippingZip;
 	}
 
