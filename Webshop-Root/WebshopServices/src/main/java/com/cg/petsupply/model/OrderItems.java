@@ -32,7 +32,7 @@ public class OrderItems implements Serializable {
 	private Long orderItemsId;
 
 	@NotNull
-	private Integer prodQuantity;
+	private Long prodQuantity;
 
 	@NotNull
 	private Double price;
@@ -59,7 +59,7 @@ public class OrderItems implements Serializable {
 	/**
 	 * @return the prodQuantity
 	 */
-	public Integer getProdQuantity() {
+	public Long getProdQuantity() {
 		return prodQuantity;
 	}
 
@@ -67,7 +67,7 @@ public class OrderItems implements Serializable {
 	 * @param prodQuantity
 	 *            the prodQuantity to set
 	 */
-	public void setProdQuantity(Integer prodQuantity) {
+	public void setProdQuantity(Long prodQuantity) {
 		this.prodQuantity = prodQuantity;
 	}
 
