@@ -22,6 +22,7 @@ import com.cg.petsupply.model.Product;
 import com.cg.petsupply.repository.IProductRepository;
 
 /**
+ * Manage Products - Implementation of IProductRepository APIs
  * @author ssukheja
  *
  */
