@@ -17,6 +17,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
+
 /**
  * This Entity maps to table CustomerOrder in DB
  * @author ssukheja 
@@ -35,20 +38,24 @@ public class CustomerOrder implements Serializable {
 	private Long orderId;
 
 	private Long orderNum;
-
-	private String status;
+	
+	private String guestFirstName;
+	
+	private String guestLastName;
 
 	@NotNull
 	private Double amountTotal;
 
-	@NotNull
+	@NotEmpty(message = "Shipping Address is a required field")
+	@Length(max = 255, message = "Limit to number of characters for address is 255")
 	private String shippingAddress;
 
-	@NotNull
+	@NotEmpty(message = "Shipping City is a required field")
+	@Length(max = 255, message = "Limit to number of characters for name is 255")
 	private String shippingCity;
 
-	@NotNull
-	private Long shippingZip;
+	@NotEmpty(message = "Shipping Zip is a required field")	
+	private String shippingZip;
 
 	private Date createdDt;
 
@@ -89,22 +96,7 @@ public class CustomerOrder implements Serializable {
 	public void setOrderNum(Long orderNum) {
 		this.orderNum = orderNum;
 	}
-
-	/**
-	 * @return the status
-	 */
-	public String getStatus() {
-		return status;
-	}
-
-	/**
-	 * @param status
-	 *            the status to set
-	 */
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
+	
 	/**
 	 * @return the amountTotal
 	 */
@@ -153,7 +145,7 @@ public class CustomerOrder implements Serializable {
 	/**
 	 * @return the shippingZip
 	 */
-	public Long getShippingZip() {
+	public String getShippingZip() {
 		return shippingZip;
 	}
 
@@ -161,7 +153,7 @@ public class CustomerOrder implements Serializable {
 	 * @param shippingZip
 	 *            the shippingZip to set
 	 */
-	public void setShippingZip(Long shippingZip) {
+	public void setShippingZip(String shippingZip) {
 		this.shippingZip = shippingZip;
 	}
 
@@ -223,6 +215,34 @@ public class CustomerOrder implements Serializable {
 	 */
 	public void setOrderId(Long orderId) {
 		this.orderId = orderId;
+	}
+
+	/**
+	 * @return the guestFirstName
+	 */
+	public String getGuestFirstName() {
+		return guestFirstName;
+	}
+
+	/**
+	 * @param guestFirstName the guestFirstName to set
+	 */
+	public void setGuestFirstName(String guestFirstName) {
+		this.guestFirstName = guestFirstName;
+	}
+
+	/**
+	 * @return the guestLastName
+	 */
+	public String getGuestLastName() {
+		return guestLastName;
+	}
+
+	/**
+	 * @param guestLastName the guestLastName to set
+	 */
+	public void setGuestLastName(String guestLastName) {
+		this.guestLastName = guestLastName;
 	}
 
 }
