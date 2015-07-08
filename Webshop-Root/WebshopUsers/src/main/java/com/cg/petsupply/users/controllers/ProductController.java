@@ -116,19 +116,28 @@ public class ProductController {
 		log.info("Product ID added to cart is " + productId + " Quantity is "
 				+ quantity);
 
-		if (this.getShoppingCartMap().containsKey(productId)) {
+		@SuppressWarnings("unchecked")
+		Map<Long, Long> cartInSession = (HashMap<Long, Long>) request
+				.getSession().getAttribute("shoppingCartMap");
+		
+		if (null != cartInSession && cartInSession.containsKey(productId)) {
 			Long newQuantity = this.getShoppingCartMap().get(productId)
 					+ quantity;
-			this.getShoppingCartMap().remove(productId);
-			this.getShoppingCartMap().put(productId, newQuantity);
+			cartInSession.remove(productId);
+			cartInSession.put(productId, newQuantity);
 			model.addAttribute("cartaddemsg",
 					Constants.addCartSuccessAlreadyExists);
-		} else {
+		} 
+		else if(null != cartInSession){			
+				cartInSession.put(productId, quantity);
+				model.addAttribute("cartaddemsg", Constants.cartAddSuccess);
+		}
+		else		
+			{
 			this.getShoppingCartMap().put(productId, quantity);
+			model.addAttribute("shoppingCartMap", this.getShoppingCartMap());
 			model.addAttribute("cartaddemsg", Constants.cartAddSuccess);
 		}
-
-		model.addAttribute("shoppingCartMap", this.getShoppingCartMap());
 
 		// Here Category List will be loaded from cache
 		model.addAttribute("selectCategoryList",
