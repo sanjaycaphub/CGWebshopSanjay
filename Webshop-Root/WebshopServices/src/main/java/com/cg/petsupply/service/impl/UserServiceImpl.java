@@ -14,6 +14,7 @@ import com.cg.petsupply.repository.IUserRepository;
 import com.cg.petsupply.service.IUserService;
 
 /**
+ * Implementation of the business services declared in IUserService
  * @author ssukheja
  *
  */
@@ -23,14 +24,7 @@ public class UserServiceImpl implements IUserService {
 
 	@Autowired
 	private IUserRepository userRepository;
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.cg.petsupply.service.IUserService#authenticateUser(java.lang.String,
-	 * java.lang.String)
-	 */
+	
 	public User authenticateAdminAndUser(String userName, String password, String userRole) {
 
 		if (userName != null && password != null) {
