@@ -29,7 +29,11 @@ public class Constants {
 	public static final String cartUpdateSuccess = "Cart updated successfully";
 	public static final String cartRemoveSuccess = "Product removed from cart successfully";
 	public static final String addCartSuccessAlreadyExists = "Product already present in Cart. Quantity added successfully";
-	//Return Views
+	public static final String wrongUserCredentials = "Incorrect login credentials. Please try again.";
+	public static final String plzAddItemsToCart = "Your Shopping Cart is Empty. Please add Products to cart before Checkout";
+	public static final String orderSuccess = "Order placed successfully and orderid is TRACK_PS_";
+	
+	//Return Views	
 	public static final String returnRegistration = "registration";
 	public static final String returnSearchProduct = "searchproduct";
 	public static final String returnShoppingCart = "shoppingCart";
@@ -37,5 +41,5 @@ public class Constants {
 	
 	public static final String returnHome = "home";
 	public static final String returnSignIn = "signin";	
-	public static final String wrongUserCredentials = "Incorrect login credentials. Please try again.";
+	public static final String returnCheckout = "checkout";
 }
