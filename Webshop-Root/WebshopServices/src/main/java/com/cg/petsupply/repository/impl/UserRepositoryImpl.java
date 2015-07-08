@@ -16,6 +16,7 @@ import com.cg.petsupply.model.User;
 import com.cg.petsupply.repository.IUserRepository;
 
 /**
+ * Implementation of IUserRepository APIs
  * @author ssukheja
  *
  */
@@ -62,6 +63,11 @@ public class UserRepositoryImpl implements IUserRepository {
 		}
 
 		return returnVar;
+	}
+	
+	public User findGuestUser(){
+		Query query = em.createQuery("select u from User u where lower(u.userName) like lower(:userName)").setParameter("userName", "guest");
+		return (User)query.getSingleResult();
 	}
 
 	private boolean checkUserNameExists(String userName) {
