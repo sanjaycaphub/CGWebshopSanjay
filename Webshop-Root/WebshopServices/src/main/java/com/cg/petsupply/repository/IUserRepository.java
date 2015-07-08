@@ -30,4 +30,9 @@ public interface IUserRepository {
 	 * @return
 	 */
 	boolean addNewUser(User user);
+	
+	/**
+	 * @return
+	 */
+	User findGuestUser();
 }
