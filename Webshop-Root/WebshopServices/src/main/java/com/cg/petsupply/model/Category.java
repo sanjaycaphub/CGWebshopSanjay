@@ -8,10 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/master
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -36,21 +33,12 @@ public class Category implements Serializable {
 	@Id
 	@GeneratedValue
 	private Long categoryId;
-<<<<<<< HEAD
 
 	@NotEmpty(message = "Category Name is required field")
 	@Length(max = 255, message = "Limit to number of characters for name is 255")
 	private String categoryName;
 
 	@Length(max = 255, message = "Limit to number of characters for description is 255")
-=======
-			
-	@NotEmpty(message="Category Name is required field")
-	@Length(max = 255, message = "Limit to number of characters for name is 255")
-	private String categoryName;
-	
-	@Length(max = 255, message = "Limit to number of characters for description is 255")	
->>>>>>> origin/master
 	private String categoryDesc;
 
 	private Date createdDt;
