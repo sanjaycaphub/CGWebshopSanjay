@@ -20,7 +20,14 @@
 		</dependency>
 	</dependencies>
 
+
 	<build>
 		<finalName>petsupplyeshop</finalName>
 	</build>
 </project>
+
+	<build>
+		<finalName>petsupplyeshop</finalName>
+	</build>	
+</project>
+

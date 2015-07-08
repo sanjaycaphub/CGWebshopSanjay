@@ -54,7 +54,11 @@ public class CustomerOrder implements Serializable {
 	@Length(max = 255, message = "Limit to number of characters for name is 255")
 	private String shippingCity;
 
+<<<<<<< HEAD
 	@NotEmpty(message = "Shipping Zip is a required field")	
+=======
+	@NotNull
+>>>>>>> 0e80373e5059bc836954e213a6408d42da5a5fd4
 	private String shippingZip;
 
 	private Date createdDt;

@@ -18,7 +18,7 @@ public final class Constants {
 	public static final String PROPERTY_NAME_DATABASE_PASSWORD = "sa";
 	public static final String PROPERTY_NAME_HIBERNATE_DIALECT = "org.hibernate.dialect.H2Dialect";
 	public static final String PROPERTY_NAME_HIBERNATE_SHOW_SQL = "true";
-	public static final String PROPERTY_NAME_HIBERNATE_HBM2DDL_AUTO = "validate";
+	public static final String PROPERTY_NAME_HIBERNATE_HBM2DDL_AUTO = "create";
 	public static final String PROPERTY_NAME_ENTITYMANAGER_PACKAGES_TO_SCAN = "com.cg.petsupply.model";
 
 	// Messages
