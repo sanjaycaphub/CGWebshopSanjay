@@ -17,10 +17,9 @@ import com.cg.petsupply.model.Category;
 import com.cg.petsupply.model.Product;
 import com.cg.petsupply.repository.ICategoryRepository;
 
-/**
+/**  
+ * Manage Categories - Implementation of ICategoryRepository APIs
  * @author ssukheja
- * Manage Categories - Implementation of Repository APIs
- *
  */
 
 @Repository("categoryRepository")
