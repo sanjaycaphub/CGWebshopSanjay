@@ -12,7 +12,8 @@
 
 function addToCart(productId)
 {
-	var prodQuantity =document.getElementById(productId).value;
+	
+	var prodQuantity = document.getElementById(productId).value;
 	  var hrefLink = "addtocart.htm?prodId="+productId+"&quantity="+prodQuantity;
 	 	document.location.href = hrefLink;
 }
@@ -86,6 +87,7 @@ function addToCart(productId)
 
 	</form>
 	<br> <br>
+	
 	<c:if test="${!empty showProductsList}">
 
 		<table id="products">
